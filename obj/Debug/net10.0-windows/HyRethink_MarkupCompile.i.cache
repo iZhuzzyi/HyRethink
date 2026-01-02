@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET10_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NET9_0_OR_GREATER;NET10_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
 C:\Users\25465\source\repos\HyRethink\HyRethink\App.xaml
-91895231234
+10-2075837726
 
-19531162777
+20-2068182639
 2061245606974
-MainWindow.xaml;Styles\AeroColors.xaml;Styles\AeroControls.xaml;Styles\WindowStyle.xaml;Views\MediaPage.xaml;Views\OperationsPage.xaml;Views\QueuePage.xaml;Views\TasksPage.xaml;Views\WelcomePage.xaml;
+MainWindow.xaml;Styles\AeroColors.xaml;Styles\AeroControls.xaml;Styles\MediaStyles.xaml;Styles\WindowStyle.xaml;Views\MediaPage.xaml;Views\OperationsPage.xaml;Views\QueuePage.xaml;Views\TasksPage.xaml;Views\WelcomePage.xaml;
 
-True
+False
 
