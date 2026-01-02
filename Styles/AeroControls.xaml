@@ -216,4 +216,166 @@
         </Setter>
     </Style>
 
+    <!-- AeroComboBoxStyle -->
+    <Style x:Key="AeroComboBoxStyle" TargetType="{x:Type ComboBox}">
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="5,2"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ComboBox}">
+                    <Grid>
+                        <!-- 默认状态背景 -->
+                        <Rectangle x:Name="IdleBackground" RadiusX="2" RadiusY="2">
+                            <Rectangle.Fill>
+                                <DrawingBrush Stretch="Uniform">
+                                    <DrawingBrush.Drawing>
+                                        <DrawingGroup>
+                                            <DrawingGroup.Children>
+                                                <GeometryDrawing Geometry="F1 M 4.01392,1.0708L 460.341,1.0708C 461.998,1.0708 463.341,2.41406 463.341,4.0708L 463.341,96.4297C 463.341,98.0864 461.998,99.4297 460.341,99.4297L 4.01392,99.4297C 2.35693,99.4297 1.01392,98.0864 1.01392,96.4297L 1.01392,4.0708C 1.01392,2.41406 2.35693,1.0708 4.01392,1.0708 Z ">
+                                                    <GeometryDrawing.Pen>
+                                                        <Pen Thickness="2" LineJoin="Round" Brush="#FF82869E"/>
+                                                    </GeometryDrawing.Pen>
+                                                    <GeometryDrawing.Brush>
+                                                        <RadialGradientBrush RadiusX="4.37756" RadiusY="6.21475" Center="0.499677,1.10935" GradientOrigin="0.499677,1.10935">
+                                                            <RadialGradientBrush.GradientStops>
+                                                                <GradientStop Color="#6ADDFFFD" Offset="0.00153139"/>
+                                                                <GradientStop Color="#3A000000" Offset="0.139357"/>
+                                                                <GradientStop Color="#E07FCEFF" Offset="0.32925"/>
+                                                                <GradientStop Color="#7F000000" Offset="0.378254"/>
+                                                                <GradientStop Color="#FF0099FF" Offset="0.828484"/>
+                                                            </RadialGradientBrush.GradientStops>
+                                                            <RadialGradientBrush.RelativeTransform>
+                                                                <TransformGroup>
+                                                                    <RotateTransform CenterX="0.499677" CenterY="1.10935" Angle="-90"/>
+                                                                </TransformGroup>
+                                                            </RadialGradientBrush.RelativeTransform>
+                                                        </RadialGradientBrush>
+                                                    </GeometryDrawing.Brush>
+                                                </GeometryDrawing>
+                                            </DrawingGroup.Children>
+                                        </DrawingGroup>
+                                    </DrawingBrush.Drawing>
+                                </DrawingBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                        <!-- 悬停状态背景 -->
+                        <Rectangle x:Name="HoverBackground" Opacity="0" RadiusX="2" RadiusY="2">
+                            <Rectangle.Fill>
+                                <DrawingBrush Stretch="Uniform">
+                                    <DrawingBrush.Drawing>
+                                        <DrawingGroup>
+                                            <DrawingGroup.Children>
+                                                <GeometryDrawing Geometry="F1 M 4.21851,1.13403L 460.546,1.13403C 462.203,1.13403 463.546,2.47729 463.546,4.13416L 463.546,96.4928C 463.546,98.1498 462.203,99.4928 460.546,99.4928L 4.21851,99.4928C 2.56152,99.4928 1.21851,98.1498 1.21851,96.4928L 1.21851,4.13416C 1.21851,2.47729 2.56152,1.13403 4.21851,1.13403 Z ">
+                                                    <GeometryDrawing.Pen>
+                                                        <Pen Thickness="2" LineJoin="Round" Brush="#FF82869E"/>
+                                                    </GeometryDrawing.Pen>
+                                                    <GeometryDrawing.Brush>
+                                                        <RadialGradientBrush RadiusX="4.37756" RadiusY="6.21475" Center="0.499677,1.08794" GradientOrigin="0.499677,1.08794">
+                                                            <RadialGradientBrush.GradientStops>
+                                                                <GradientStop Color="#7800F3FF" Offset="0"/>
+                                                                <GradientStop Color="#3F000000" Offset="0.148545"/>
+                                                                <GradientStop Color="#FFA5DBFF" Offset="0.316998"/>
+                                                                <GradientStop Color="#FF0099FF" Offset="0.577335"/>
+                                                            </RadialGradientBrush.GradientStops>
+                                                            <RadialGradientBrush.RelativeTransform>
+                                                                <TransformGroup>
+                                                                    <RotateTransform CenterX="0.499677" CenterY="1.08794" Angle="-90"/>
+                                                                </TransformGroup>
+                                                            </RadialGradientBrush.RelativeTransform>
+                                                        </RadialGradientBrush>
+                                                    </GeometryDrawing.Brush>
+                                                </GeometryDrawing>
+                                            </DrawingGroup.Children>
+                                        </DrawingGroup>
+                                    </DrawingBrush.Drawing>
+                                </DrawingBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                        <!-- 按下/展开状态背景 -->
+                        <Rectangle x:Name="PressedBackground" Opacity="0" RadiusX="2" RadiusY="2">
+                            <Rectangle.Fill>
+                                <DrawingBrush Stretch="Uniform">
+                                    <DrawingBrush.Drawing>
+                                        <DrawingGroup>
+                                            <DrawingGroup.Children>
+                                                <GeometryDrawing Geometry="F1 M 4.38721,1.09839L 460.714,1.09839C 462.371,1.09839 463.714,2.44165 463.714,4.09839L 463.714,96.4573C 463.714,98.114 462.371,99.4573 460.714,99.4573L 4.38721,99.4573C 2.73022,99.4573 1.38721,98.114 1.38721,96.4573L 1.38721,4.09839C 1.38721,2.44165 2.73022,1.09839 4.38721,1.09839 Z ">
+                                                    <GeometryDrawing.Pen>
+                                                        <Pen Thickness="2" LineJoin="Round" Brush="#FF82869E"/>
+                                                    </GeometryDrawing.Pen>
+                                                    <GeometryDrawing.Brush>
+                                                        <RadialGradientBrush RadiusX="4.37756" RadiusY="6.21475" Center="0.499677,1.08794" GradientOrigin="0.499677,1.08794">
+                                                            <RadialGradientBrush.GradientStops>
+                                                                <GradientStop Color="#FF00F3FF" Offset="0"/>
+                                                                <GradientStop Color="#58000000" Offset="0.169985"/>
+                                                                <GradientStop Color="#EBA5DBFF" Offset="0.307808"/>
+                                                                <GradientStop Color="#FF0099FF" Offset="0.577335"/>
+                                                            </RadialGradientBrush.GradientStops>
+                                                            <RadialGradientBrush.RelativeTransform>
+                                                                <TransformGroup>
+                                                                    <RotateTransform CenterX="0.499677" CenterY="1.08794" Angle="-90"/>
+                                                                </TransformGroup>
+                                                            </RadialGradientBrush.RelativeTransform>
+                                                        </RadialGradientBrush>
+                                                    </GeometryDrawing.Brush>
+                                                </GeometryDrawing>
+                                            </DrawingGroup.Children>
+                                        </DrawingGroup>
+                                    </DrawingBrush.Drawing>
+                                </DrawingBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+
+                        <ContentPresenter Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="Left"
+                                          VerticalAlignment="Center"
+                                          Content="{TemplateBinding SelectionBoxItem}"
+                                          ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                          ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"/>
+                        <Path Data="M 0 0 L 4 4 L 8 0 Z" Fill="White" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0" IsHitTestVisible="False"/>
+                        <Popup x:Name="PART_Popup" AllowsTransparency="True" IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Placement="Bottom" PopupAnimation="Slide">
+                            <Border Background="#CC000000" BorderBrush="#66FFFFFF" BorderThickness="1" MaxHeight="{TemplateBinding MaxDropDownHeight}" MinWidth="{TemplateBinding ActualWidth}">
+                                <ScrollViewer>
+                                    <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained"/>
+                                </ScrollViewer>
+                            </Border>
+                        </Popup>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="HoverBackground" Property="Opacity" Value="1"/>
+                        </Trigger>
+                        <Trigger Property="IsDropDownOpen" Value="True">
+                            <Setter TargetName="PressedBackground" Property="Opacity" Value="1"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- AeroTextBoxStyle -->
+    <Style x:Key="AeroTextBoxStyle" TargetType="{x:Type TextBox}">
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Background" Value="#33000000"/>
+        <Setter Property="BorderBrush" Value="#66FFFFFF"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="2"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="2">
+                        <ScrollViewer x:Name="PART_ContentHost"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

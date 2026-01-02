@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:HyRethink.ViewModels"
         xmlns:views="clr-namespace:HyRethink.Views"
         mc:Ignorable="d"
-        Title="HyRethink" Height="801" Width="778"
+        Title="HyRethink" Height="801" Width="815"
         Style="{StaticResource AeroWindowStyle}"
         WindowStartupLocation="CenterScreen"
         Background="{StaticResource AeroWindowBackgroundBrush}">
