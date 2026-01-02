@@ -8,6 +8,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/AeroColors.xaml"/>
                 <ResourceDictionary Source="Styles/AeroControls.xaml"/>
+                <ResourceDictionary Source="Styles/AeroScrollBars.xaml"/>
                 <ResourceDictionary Source="Styles/WindowStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

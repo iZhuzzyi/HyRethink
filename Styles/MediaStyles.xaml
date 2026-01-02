@@ -206,7 +206,8 @@
         <Setter Property="FontWeight" Value="Normal"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="Padding" Value="10,5"/>
-        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Margin" Value="-2"/>
+        <!-- 这个Margin很奇怪但千万不要动除非你是人类并且有把握修复好 -->
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="GridViewColumnHeader">

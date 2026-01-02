@@ -71,10 +71,12 @@
             </Grid.ColumnDefinitions>
 
             <!-- 左侧缩略图列表 -->
-            <Border Grid.Column="0" Panel.ZIndex="1" BorderBrush="#33FFFFFF" BorderThickness="0,0,1,0" Background="#0DFFFFFF">
-                <ListBox ItemsSource="{Binding MediaItems}"
-                         SelectedItem="{Binding SelectedMediaItem}"
-                         Background="Transparent" 
+            <Border Grid.Column="0" Panel.ZIndex="1" BorderBrush="#33FFFFFF" BorderThickness="1" Background="#0DFFFFFF" Margin="0,0,3.5,3.5" CornerRadius="3">
+                <ListBox x:Name="MediaListBox"
+                         ItemsSource="{Binding MediaItems}"
+                         SelectionMode="Extended"
+                         SelectionChanged="ListBox_SelectionChanged"
+                         Background="Transparent"
                          BorderThickness="0"
                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                          ItemContainerStyle="{StaticResource MediaListBoxItemStyle}">
@@ -98,50 +100,58 @@
             </Border>
 
             <!-- 右侧详细列表 -->
-            <ListView Grid.Column="1"
-                      Margin="0,0,0,0"
-                      ItemsSource="{Binding MediaItems}"
-                      SelectedItem="{Binding SelectedMediaItem}"
-                      Background="Transparent"
-                      BorderThickness="0"
-                      Padding="0"
-                      SnapsToDevicePixels="True"
-                      Foreground="White"
-                      ItemContainerStyle="{StaticResource MediaListViewItemStyle}">
-                <ListView.View>
-                    <GridView ColumnHeaderContainerStyle="{StaticResource MediaListViewHeaderStyle}">
-                        <GridViewColumn Header="名称" Width="200" DisplayMemberBinding="{Binding Name}"/>
-                        <GridViewColumn Header="格式" Width="60" DisplayMemberBinding="{Binding Format}"/>
-                        <GridViewColumn Header="大小" Width="80" DisplayMemberBinding="{Binding Size}"/>
-                        <GridViewColumn Header="持续时间" Width="80" DisplayMemberBinding="{Binding Duration}"/>
-                        <GridViewColumn Header="分辨率" Width="100" DisplayMemberBinding="{Binding Resolution}"/>
-                    </GridView>
-                </ListView.View>
-            </ListView>
+            <Border Grid.Column="1" BorderBrush="#33FFFFFF" BorderThickness="1" Margin="3.5,0,0,3.5" CornerRadius="3">
+                <ListView x:Name="MediaListView"
+                          Margin="0,0,0,0"
+                          ItemsSource="{Binding MediaItems}"
+                          SelectionMode="Extended"
+                          SelectionChanged="ListView_SelectionChanged"
+                          Background="Transparent"
+                          BorderThickness="0"
+                          Padding="0"
+                          SnapsToDevicePixels="True"
+                          Foreground="White"
+                          ItemContainerStyle="{StaticResource MediaListViewItemStyle}">
+                    <ListView.View>
+                        <GridView ColumnHeaderContainerStyle="{StaticResource MediaListViewHeaderStyle}">
+                            <GridViewColumn Header="名称" Width="200" DisplayMemberBinding="{Binding Name}"/>
+                            <GridViewColumn Header="格式" Width="60" DisplayMemberBinding="{Binding Format}"/>
+                            <GridViewColumn Header="大小" Width="80" DisplayMemberBinding="{Binding Size}"/>
+                            <GridViewColumn Header="持续时间" Width="80" DisplayMemberBinding="{Binding Duration}"/>
+                            <GridViewColumn Header="分辨率" Width="100" DisplayMemberBinding="{Binding Resolution}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Border>
         </Grid>
 
         <!-- 底部信息区 -->
-        <Border Grid.Row="2" Background="#CC000000" BorderBrush="#33FFFFFF" BorderThickness="0,1,0,0">
-            <Grid Margin="10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="300"/> <!-- 视频预览 -->
-                    <ColumnDefinition Width="*"/>   <!-- 详细信息 -->
-                </Grid.ColumnDefinitions>
+        <Grid Grid.Row="2" Margin="0,3.5,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="320"/> <!-- 视频预览 -->
+                <ColumnDefinition Width="*"/>   <!-- 详细信息 -->
+            </Grid.ColumnDefinitions>
 
-                <!-- 视频预览占位符 -->
-                <Border Grid.Column="0" Background="Black" BorderBrush="#33FFFFFF" BorderThickness="1" Margin="0,0,10,0">
-                    <Grid>
-                        <TextBlock Text="视频预览区域" Foreground="#66FFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <!-- 播放控制条占位 -->
-                        <StackPanel VerticalAlignment="Bottom" Background="#80000000" Height="30" Orientation="Horizontal">
-                            <TextBlock Text="▶" Foreground="White" Margin="10,0" VerticalAlignment="Center"/>
-                            <Slider Width="200" VerticalAlignment="Center"/>
-                        </StackPanel>
-                    </Grid>
-                </Border>
+            <!-- 视频预览区域 -->
+            <Border Grid.Column="0" Background="#CC000000" BorderBrush="#33FFFFFF" BorderThickness="1" CornerRadius="3" Margin="0,0,3.5,0">
+                <Grid Margin="10">
+                    <!-- 视频预览占位符 -->
+                    <Border Background="Black" BorderBrush="#33FFFFFF" BorderThickness="1">
+                        <Grid>
+                            <TextBlock Text="视频预览区域" Foreground="#66FFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <!-- 播放控制条占位 -->
+                            <StackPanel VerticalAlignment="Bottom" Background="#80000000" Height="30" Orientation="Horizontal">
+                                <TextBlock Text="▶" Foreground="White" Margin="10,0" VerticalAlignment="Center"/>
+                                <Slider Width="200" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
 
-                <!-- 详细信息表单 -->
-                <Grid Grid.Column="1" DataContext="{Binding SelectedMediaItem}">
+            <!-- 详细信息区域 -->
+            <Border Grid.Column="1" Background="#26161616" BorderBrush="#33FFFFFF" BorderThickness="1" CornerRadius="3" Margin="3.5,0,0,0">
+                <Grid Margin="10" DataContext="{Binding SelectedMediaItem}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
@@ -182,7 +192,7 @@
                     <TextBlock Grid.Row="2" Grid.Column="3" Text="分辨率：" Foreground="White" Margin="0,5,10,5"/>
                     <TextBox Grid.Row="2" Grid.Column="4" Text="{Binding Resolution}" Margin="0,2" Background="#33000000" Foreground="White" BorderBrush="#66FFFFFF" IsReadOnly="True" Style="{StaticResource AeroTextBoxStyle}"/>
                 </Grid>
-            </Grid>
-        </Border>
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>

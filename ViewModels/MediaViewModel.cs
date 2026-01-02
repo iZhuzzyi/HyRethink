@@ -18,7 +18,12 @@ namespace HyRethink.ViewModels
         public ObservableCollection<MediaItem> MediaItems { get; } = new ObservableCollection<MediaItem>();
 
         /// <summary>
-        /// 当前选中的媒体项目
+        /// 当前选中的媒体项目集合
+        /// </summary>
+        public ObservableCollection<MediaItem> SelectedMediaItems { get; } = new ObservableCollection<MediaItem>();
+
+        /// <summary>
+        /// 当前选中的媒体项目（用于显示详情，通常是最后选中的那个）
         /// </summary>
         public MediaItem? SelectedMediaItem
         {
@@ -109,21 +114,36 @@ namespace HyRethink.ViewModels
 
         private void ExecuteRemove(object? parameter)
         {
-            if (SelectedMediaItem != null)
+            // 创建一个副本以避免在遍历时修改集合
+            var itemsToRemove = SelectedMediaItems.ToList();
+            
+            foreach (var item in itemsToRemove)
             {
-                MediaItems.Remove(SelectedMediaItem);
+                MediaItems.Remove(item);
+                SelectedMediaItems.Remove(item);
+            }
+
+            // 如果还有选中的项目（理论上不应该，除非删除失败），更新 SelectedMediaItem
+            // 否则清空 SelectedMediaItem
+            if (SelectedMediaItems.Count == 0)
+            {
                 SelectedMediaItem = null;
+            }
+            else
+            {
+                SelectedMediaItem = SelectedMediaItems.LastOrDefault();
             }
         }
 
         private bool CanExecuteRemove(object? parameter)
         {
-            return SelectedMediaItem != null;
+            return SelectedMediaItems.Count > 0;
         }
 
         private void ExecuteClear(object? parameter)
         {
             MediaItems.Clear();
+            SelectedMediaItems.Clear();
             SelectedMediaItem = null;
         }
 

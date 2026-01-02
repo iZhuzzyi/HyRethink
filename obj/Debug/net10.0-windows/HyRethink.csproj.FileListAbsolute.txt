@@ -35,3 +35,4 @@ C:\Users\25465\source\repos\HyRethink\HyRethink\obj\Debug\net10.0-windows\Views\
 C:\Users\25465\source\repos\HyRethink\HyRethink\obj\Debug\net10.0-windows\Views\WelcomePage.baml
 C:\Users\25465\source\repos\HyRethink\HyRethink\obj\Debug\net10.0-windows\Styles\MediaStyles.baml
 C:\Users\25465\source\repos\HyRethink\HyRethink\obj\Debug\net10.0-windows\HyRethink.sourcelink.json
+C:\Users\25465\source\repos\HyRethink\HyRethink\obj\Debug\net10.0-windows\Styles\AeroScrollBars.baml
