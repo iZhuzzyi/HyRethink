@@ -154,13 +154,12 @@
                 <Grid Margin="10" DataContext="{Binding SelectedMediaItem}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="20"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -174,23 +173,28 @@
                     <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Format}" Foreground="White" Margin="0,5"/>
 
                     <TextBlock Grid.Row="2" Grid.Column="0" Text="音频：" Foreground="White" Margin="0,5,10,5"/>
-                    <ComboBox Grid.Row="2" Grid.Column="1" Margin="0,2" IsEnabled="False" Text="默认音频流" Style="{StaticResource AeroComboBoxStyle}"/>
+                    <ComboBox Grid.Row="2" Grid.Column="1" Width="120" HorizontalAlignment="Left" Margin="0,2" SelectedIndex="0" Style="{StaticResource AeroComboBoxStyle}">
+                        <ComboBoxItem Content="默认音频流"/>
+                        <ComboBoxItem Content="音频流 1"/>
+                        <ComboBoxItem Content="音频流 2"/>
+                    </ComboBox>
 
                     <TextBlock Grid.Row="3" Grid.Column="0" Text="音效：" Foreground="White" Margin="0,5,10,5"/>
-                    <ComboBox Grid.Row="3" Grid.Column="1" Margin="0,2" IsEnabled="False" Text="正常" Style="{StaticResource AeroComboBoxStyle}"/>
-
-                    <TextBlock Grid.Row="4" Grid.Column="0" Text="字幕节目：" Foreground="White" Margin="0,5,10,5"/>
-                    <ComboBox Grid.Row="4" Grid.Column="1" Margin="0,2" IsEnabled="False" Text="正常" Style="{StaticResource AeroComboBoxStyle}"/>
+                    <ComboBox Grid.Row="3" Grid.Column="1" Width="120" HorizontalAlignment="Left" Margin="0,2" SelectedIndex="0" Style="{StaticResource AeroComboBoxStyle}">
+                        <ComboBoxItem Content="正常"/>
+                        <ComboBoxItem Content="增强低音"/>
+                        <ComboBoxItem Content="清晰人声"/>
+                    </ComboBox>
 
                     <!-- 右侧列 -->
                     <TextBlock Grid.Row="0" Grid.Column="3" Text="名称：" Foreground="White" Margin="0,5,10,5"/>
-                    <TextBox Grid.Row="0" Grid.Column="4" Text="{Binding Name}" Margin="0,2" Background="#33000000" Foreground="White" BorderBrush="#66FFFFFF" Style="{StaticResource AeroTextBoxStyle}"/>
+                    <TextBox Grid.Row="0" Grid.Column="4" Width="120" HorizontalAlignment="Left" Text="{Binding Name}" Margin="0,2" Background="#33000000" Foreground="White" BorderBrush="#66FFFFFF" Style="{StaticResource AeroTextBoxStyle}"/>
 
                     <TextBlock Grid.Row="1" Grid.Column="3" Text="地址：" Foreground="White" Margin="0,5,10,5"/>
-                    <TextBox Grid.Row="1" Grid.Column="4" Text="{Binding FilePath}" Margin="0,2" Background="#33000000" Foreground="White" BorderBrush="#66FFFFFF" IsReadOnly="True" Style="{StaticResource AeroTextBoxStyle}"/>
+                    <TextBox Grid.Row="1" Grid.Column="4" Width="120" HorizontalAlignment="Left" Text="{Binding FilePath}" Margin="0,2" Background="#33000000" Foreground="White" BorderBrush="#66FFFFFF" IsReadOnly="True" Style="{StaticResource AeroTextBoxStyle}"/>
 
                     <TextBlock Grid.Row="2" Grid.Column="3" Text="分辨率：" Foreground="White" Margin="0,5,10,5"/>
-                    <TextBox Grid.Row="2" Grid.Column="4" Text="{Binding Resolution}" Margin="0,2" Background="#33000000" Foreground="White" BorderBrush="#66FFFFFF" IsReadOnly="True" Style="{StaticResource AeroTextBoxStyle}"/>
+                    <TextBox Grid.Row="2" Grid.Column="4" Width="120" HorizontalAlignment="Left" Text="{Binding Resolution}" Margin="0,2" Background="#33000000" Foreground="White" BorderBrush="#66FFFFFF" IsReadOnly="True" Style="{StaticResource AeroTextBoxStyle}"/>
                 </Grid>
             </Border>
         </Grid>

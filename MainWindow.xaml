@@ -36,7 +36,7 @@
              因为 TabControl 的内容区域需要显示在主内容区域 -->
         <Grid Grid.Row="0" Grid.RowSpan="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="40"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
@@ -44,7 +44,7 @@
             <Border Grid.Row="0" Background="{StaticResource AeroHeaderBrush}" BorderBrush="{StaticResource AeroBorderBrush}" BorderThickness="0,0,0,1">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="183"/>
+                        <ColumnDefinition Width="150"/>
                         <!-- Logo区域宽度 -->
                         <ColumnDefinition/>
                         <ColumnDefinition Width="Auto"/>
@@ -59,21 +59,21 @@
                                 Orientation="Horizontal"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Left"
-                                Margin="17,0,0,0" Height="49" Width="134">
+                                Margin="10,0,0,0" Height="32">
                         <Image
-                               Height="49"
-                               Width="56"
+                               Height="32"
                                Stretch="Uniform"
                                RenderOptions.BitmapScalingMode="HighQuality"
                                UseLayoutRounding="True"
                                SnapsToDevicePixels="True"
                                Source="Resources/HyRethinkLogo.png"
-                               RenderTransformOrigin="0.498,0.483"/>
+                               Margin="0,0,10,0"/>
                         <TextBlock
                                    Text="HyRethink"
                                    Foreground="{StaticResource AeroTextBrush}"
-                                   FontSize="16"
-                                   FontWeight="SemiBold" FontFamily="Segoe UI" Width="78" Height="21"/>
+                                   FontSize="14"
+                                   VerticalAlignment="Center"
+                                   FontWeight="SemiBold" FontFamily="Segoe UI"/>
                     </StackPanel>
 
                     <!-- 窗口控制按钮（如果需要可在此添加，或依赖系统窗口框架） -->
@@ -91,18 +91,18 @@
                         Background="Transparent"
                         BorderThickness="0"
                         Margin="0,-1,0,0"
-                        Padding="200,0,0,0"
+                        Padding="160,0,0,0"
                         SelectedIndex="{Binding SelectedTabIndex}">
-                <TabItem Header="媒体" Style="{StaticResource AeroTabItemStyle}" FontFamily="Segoe UI" FontSize="24">
+                <TabItem Header="媒体" Style="{StaticResource AeroTabItemStyle}" FontFamily="Segoe UI" FontSize="14">
                     <views:MediaPage DataContext="{Binding MediaVM}"/>
                 </TabItem>
-                <TabItem Header="操作" Style="{StaticResource AeroTabItemStyle}" FontFamily="Segoe UI" FontSize="24">
+                <TabItem Header="操作" Style="{StaticResource AeroTabItemStyle}" FontFamily="Segoe UI" FontSize="14">
                     <views:OperationsPage DataContext="{Binding OperationsVM}"/>
                 </TabItem>
-                <TabItem Header="任务" Style="{StaticResource AeroTabItemStyle}" FontFamily="Segoe UI" FontSize="24">
+                <TabItem Header="任务" Style="{StaticResource AeroTabItemStyle}" FontFamily="Segoe UI" FontSize="14">
                     <views:TasksPage DataContext="{Binding TasksVM}"/>
                 </TabItem>
-                <TabItem Header="队列" Style="{StaticResource AeroTabItemStyle}" FontFamily="Segoe UI" FontSize="24">
+                <TabItem Header="队列" Style="{StaticResource AeroTabItemStyle}" FontFamily="Segoe UI" FontSize="14">
                     <views:QueuePage DataContext="{Binding QueueVM}"/>
                 </TabItem>
             </TabControl>

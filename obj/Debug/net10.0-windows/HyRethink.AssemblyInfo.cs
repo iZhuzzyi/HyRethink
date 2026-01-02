@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HyRethink")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+49c808aeb7cb26e4cbe14f7ad728562cb193e729")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2edbfbe6c205513e55593ca630e30d8fa1e0f2ba")]
 [assembly: System.Reflection.AssemblyProductAttribute("HyRethink")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HyRethink")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
