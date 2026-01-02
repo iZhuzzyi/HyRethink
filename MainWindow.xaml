@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HyRethink"
         xmlns:vm="clr-namespace:HyRethink.ViewModels"
+        xmlns:views="clr-namespace:HyRethink.Views"
         mc:Ignorable="d"
-        Title="HyRethink" Height="935" Width="900"
+        Title="HyRethink" Height="801" Width="778"
         Style="{StaticResource AeroWindowStyle}"
         WindowStartupLocation="CenterScreen"
         Background="{StaticResource AeroWindowBackgroundBrush}">
@@ -17,109 +18,115 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <!-- Top Glass Bar -->
+            <RowDefinition Height="Auto"/>
+            <!-- 顶部玻璃条 + TabControl -->
             <RowDefinition Height="*"/>
-            <!-- Main Content -->
+            <!-- 主内容区域 -->
             <RowDefinition Height="30"/>
-            <!-- Bottom Status Bar -->
+            <!-- 底部状态栏 -->
         </Grid.RowDefinitions>
 
-        <!-- Red Swoosh Background Graphic (Spanning Rows 1 and 2) -->
+        <!-- 背景图形层（跨越第1和第2行） -->
         <Grid Grid.Row="1" Grid.RowSpan="2" VerticalAlignment="Bottom" Height="200" Margin="0,0,0,30">
-            <!-- Reflection/Highlight on Swoosh -->
+            <!-- 反射/高光效果占位 -->
         </Grid>
 
-        <!-- Top Glass Bar with Tabs -->
-        <Border Grid.Row="0" Background="{StaticResource AeroHeaderBrush}" BorderBrush="{StaticResource AeroBorderBrush}" BorderThickness="0,0,0,1">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="200"/>
-                    <!-- Sidebar Width Placeholder -->
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <!-- Window Controls Placeholder -->
-                </Grid.ColumnDefinitions>
+        <!-- 顶部玻璃条（含标签页） -->
+        <!-- 注意：这里我们将 TabControl 放在 Grid.Row="0" 并让它跨越到 Grid.Row="1"
+             因为 TabControl 的内容区域需要显示在主内容区域 -->
+        <Grid Grid.Row="0" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-                <!-- Sheen overlay (moved from tabs to the header layer) -->
-                <Border Grid.ColumnSpan="3" Background="{StaticResource AeroHeaderOverlayBrush}" Opacity="1" IsHitTestVisible="False"/>
+            <!-- 顶部背景 -->
+            <Border Grid.Row="0" Background="{StaticResource AeroHeaderBrush}" BorderBrush="{StaticResource AeroBorderBrush}" BorderThickness="0,0,0,1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <!-- Logo区域宽度 -->
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <!-- 窗口控制按钮占位 -->
+                    </Grid.ColumnDefinitions>
 
-                <!-- Logo/Title Area -->
-                <StackPanel Grid.Column="0"
-                            Orientation="Horizontal"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Left"
-                            Margin="17,0,0,0">
-                    <Image
-                           Height="49"
-                           Width="56"
-                           Stretch="Uniform"
-                           RenderOptions.BitmapScalingMode="HighQuality"
-                           UseLayoutRounding="True"
-                           SnapsToDevicePixels="True"
-                           Source="Resources/HyRethinkLogo.png"
-                           RenderTransformOrigin="0.498,0.483"/>
-                    <TextBlock
-                               Text="HyRethink"
-                               Foreground="{StaticResource AeroTextBrush}"
-                               FontSize="16"
-                               FontWeight="SemiBold" FontFamily="Segoe UI" Width="78" Height="21"/>
-                </StackPanel>
+                    <!-- Logo/标题区域 -->
+                    <!-- 独立高光层：Logo 区域 -->
+                    <Border Grid.Column="0" Background="{StaticResource AeroHeaderOverlayBrush}" IsHitTestVisible="False"/>
 
-                <!-- Tabs -->
-                <TabControl Grid.Column="1" Style="{StaticResource AeroTabControlStyle}" Background="Transparent" BorderThickness="0" Margin="0,-1,0,0">
-                    <TabItem Header="媒体" Style="{StaticResource AeroTabItemStyle}" FontFamily="Segoe UI" FontSize="24"/>
-                    <TabItem Header="操作" Style="{StaticResource AeroTabItemStyle}" FontFamily="Segoe UI" FontSize="24"/>
-                    <TabItem Header="任务" Style="{StaticResource AeroTabItemStyle}" FontFamily="Segoe UI" FontSize="24"/>
-                    <TabItem Header="队列" Style="{StaticResource AeroTabItemStyle}" FontFamily="Segoe UI" FontSize="24"/>
-                </TabControl>
+                    <StackPanel Grid.Column="0"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Left"
+                                Margin="17,0,0,0">
+                        <Image
+                               Height="49"
+                               Width="56"
+                               Stretch="Uniform"
+                               RenderOptions.BitmapScalingMode="HighQuality"
+                               UseLayoutRounding="True"
+                               SnapsToDevicePixels="True"
+                               Source="Resources/HyRethinkLogo.png"
+                               RenderTransformOrigin="0.498,0.483"/>
+                        <TextBlock
+                                   Text="HyRethink"
+                                   Foreground="{StaticResource AeroTextBrush}"
+                                   FontSize="16"
+                                   FontWeight="SemiBold" FontFamily="Segoe UI" Width="78" Height="21"/>
+                    </StackPanel>
 
-                <!-- Window Controls (Simulated for visual completeness if needed, or rely on system if frame was kept) -->
-            </Grid>
-        </Border>
-
-        <!-- Main Content Area -->
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
-                <!-- Sidebar -->
-                <ColumnDefinition Width="*"/>
-                <!-- Content -->
-            </Grid.ColumnDefinitions>
-
-            <!-- Sidebar -->
-            <Border Grid.Column="0" Background="{StaticResource AeroSidebarBrush}" BorderBrush="{StaticResource AeroBorderBrush}" BorderThickness="0,0,1,0">
-                <StackPanel Margin="10">
-                    <TextBlock Text="快速任务" Foreground="#AAFFFFFF" Margin="0,10,0,5" FontWeight="Bold"/>
-                    <Button Content="创建新光盘" HorizontalContentAlignment="Left" Padding="10,5" Background="Transparent" Foreground="White" BorderThickness="0" Margin="0,2"/>
-                    <Button Content="打开现有项目" HorizontalContentAlignment="Left" Padding="10,5" Background="Transparent" Foreground="White" BorderThickness="0" Margin="0,2"/>
-                    <Button Content="最近文件" HorizontalContentAlignment="Left" Padding="10,5" Background="Transparent" Foreground="White" BorderThickness="0" Margin="0,2"/>
-                </StackPanel>
+                    <!-- 窗口控制按钮（如果需要可在此添加，或依赖系统窗口框架） -->
+                    <!-- 独立高光层：窗口控制区域 -->
+                    <Border Grid.Column="2" Background="{StaticResource AeroHeaderOverlayBrush}" IsHitTestVisible="False"/>
+                </Grid>
             </Border>
 
-            <!-- Content Area -->
-            <Grid Grid.Column="1">
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-50,0,0">
-                    <TextBlock Text="欢迎使用 HyRethink" 
-                               Foreground="White" 
-                               FontSize="32" 
-                               HorizontalAlignment="Left" 
-                               Margin="0,0,0,20">
-                        <TextBlock.Effect>
-                            <DropShadowEffect ShadowDepth="2" BlurRadius="10" Opacity="0.8"/>
-                        </TextBlock.Effect>
-                    </TextBlock>
-                    <TextBlock Text="1. 创建 VPD 与光盘选集功能。" Foreground="#DDFFFFFF" FontSize="16" Margin="0,5"/>
-                    <TextBlock Text="2. 用这个你与光盘更选集开启。" Foreground="#DDFFFFFF" FontSize="16" Margin="0,5"/>
+            <!-- 标签页控件 -->
+            <!-- 跨越两行，Header在Row 0，Content在Row 1 -->
+            <TabControl x:Name="MainTabControl"
+                        Grid.Row="0" Grid.RowSpan="2"
+                        Grid.ColumnSpan="3"
+                        Style="{StaticResource AeroTabControlStyle}"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Margin="200,-1,0,0"
+                        SelectedIndex="{Binding SelectedTabIndex}">
+                <TabItem Header="媒体" Style="{StaticResource AeroTabItemStyle}" FontFamily="Segoe UI" FontSize="24">
+                    <views:MediaPage DataContext="{Binding MediaVM}" Margin="-202,0,0,0"/>
+                </TabItem>
+                <TabItem Header="操作" Style="{StaticResource AeroTabItemStyle}" FontFamily="Segoe UI" FontSize="24">
+                    <views:OperationsPage DataContext="{Binding OperationsVM}" Margin="-202,0,0,0"/>
+                </TabItem>
+                <TabItem Header="任务" Style="{StaticResource AeroTabItemStyle}" FontFamily="Segoe UI" FontSize="24">
+                    <views:TasksPage DataContext="{Binding TasksVM}" Margin="-202,0,0,0"/>
+                </TabItem>
+                <TabItem Header="队列" Style="{StaticResource AeroTabItemStyle}" FontFamily="Segoe UI" FontSize="24">
+                    <views:QueuePage DataContext="{Binding QueueVM}" Margin="-202,0,0,0"/>
+                </TabItem>
+            </TabControl>
+        </Grid>
 
-                    <!-- Icons Row -->
-                </StackPanel>
-
-                <!-- Big Power Button (Bottom Right) -->
+        <!-- 主内容区域 -->
+        <Grid Grid.Row="1" IsHitTestVisible="False">
+            <!-- 欢迎页面 -->
+            <Grid IsHitTestVisible="True">
+                <views:WelcomePage DataContext="{Binding WelcomeVM}">
+                    <views:WelcomePage.Style>
+                        <Style TargetType="UserControl">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding SelectedTabIndex}" Value="-1">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </views:WelcomePage.Style>
+                </views:WelcomePage>
             </Grid>
         </Grid>
 
-        <!-- Bottom Status Bar -->
+        <!-- 底部状态栏 -->
         <Border Grid.Row="2" Background="{StaticResource AeroFooterBrush}" BorderBrush="{StaticResource AeroBorderBrush}" BorderThickness="0,1,0,0">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -127,11 +134,11 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Inner Highlight -->
+                <!-- 内部高光线 -->
                 <Border Grid.ColumnSpan="2" BorderBrush="#33FFFFFF" BorderThickness="0,1,0,0" VerticalAlignment="Top" Height="1"/>
 
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0">
-                    <TextBlock Text="新闻" Foreground="{StaticResource AeroTextBrush}" Margin="0,0,20,0"/>
+                    <TextBlock Text="消息" Foreground="{StaticResource AeroTextBrush}" Margin="0,0,20,0"/>
                     <TextBlock Text="{Binding StatusMessage}" Foreground="{StaticResource AeroTextBrush}"/>
                 </StackPanel>
 

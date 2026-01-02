@@ -6,21 +6,64 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
                     <Grid x:Name="Root" MinWidth="128" Height="50">
-                        <!-- Selection Glow (kept behind content so text remains visible) -->
-                        <Border x:Name="SelectionGlow"
-                                Background="{StaticResource AeroTabSelectedBrush}"
-                                Opacity="0"
-                                IsHitTestVisible="False"/>
+                        <!-- 独立底色层：遮挡下方 TabControl 的背景 -->
+                        <Border Background="{StaticResource AeroHeaderBrush}" />
 
-                        <!-- Main Background -->
+                        <!-- 独立高光层：模拟全局高光 -->
+                        <Border x:Name="IndependentHighlight" Background="{StaticResource AeroHeaderOverlayBrush}" Opacity="1" Margin="0,0,0,0" />
+
+                        <!-- 额外的高光增强层 (Glow)，用于选中时显著增加亮度 -->
+                        <Border x:Name="IndependentHighlightGlow" Opacity="0" Margin="0,0,0,0" IsHitTestVisible="False">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                    <GradientStop Color="#60FFFFFF" Offset="0"/>
+                                    <GradientStop Color="#10FFFFFF" Offset="0.45"/>
+                                    <GradientStop Color="#00FFFFFF" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
+
+                        <!-- 选中状态的径向发光效果（椭圆形青色光晕，定位于下四分之一部分） -->
+                        <Border x:Name="SelectionGlow"
+                                Opacity="0"
+                                IsHitTestVisible="False">
+                            <Border.Background>
+                                <RadialGradientBrush RadiusX="0.6" RadiusY="0.5" Center="0.5,0.85" GradientOrigin="0.5,0.85">
+                                    <RadialGradientBrush.GradientStops>
+                                        <GradientStop Color="#FF61D1F0" Offset="0"/>
+                                        <GradientStop Color="#00000000" Offset="0.662338"/>
+                                    </RadialGradientBrush.GradientStops>
+                                </RadialGradientBrush>
+                            </Border.Background>
+                        </Border>
+
+                        <!-- 选中状态的线性渐变覆盖层（从透明到青色） -->
+                        <Border x:Name="SelectionOverlay"
+                                Opacity="0"
+                                IsHitTestVisible="False">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0.5,-0.667874" EndPoint="0.5,1.66787">
+                                    <LinearGradientBrush.GradientStops>
+                                        <GradientStop Color="#00FFFFFF" Offset="0"/>
+                                        <GradientStop Color="#00FFFFFF" Offset="0.487941"/>
+                                        <GradientStop Color="#00000004" Offset="0.517625"/>
+                                        <GradientStop Color="#FF38CBF4" Offset="0.717996"/>
+                                    </LinearGradientBrush.GradientStops>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
+
+                        <!-- 主背景边框 -->
                         <Border x:Name="Border"
-                                Background="Transparent"
                                 BorderBrush="{StaticResource AeroSeparatorBrush}"
                                 BorderThickness="0,0,1,0">
+                            <Border.Background>
+                                <SolidColorBrush Color="Transparent"/>
+                            </Border.Background>
                             <Grid>
                                 <ContentPresenter x:Name="ContentSite"
-                                                  ContentSource="Header" 
-                                                  HorizontalAlignment="Center" 
+                                                  ContentSource="Header"
+                                                  HorizontalAlignment="Center"
                                                   VerticalAlignment="Center"
                                                   TextElement.Foreground="{StaticResource AeroTextBrush}"
                                                   TextElement.FontSize="14"
@@ -29,31 +72,89 @@
                             </Grid>
                         </Border>
                         
-                        <!-- Selection Glow/Highlight (Top Bar) -->
-                        <Border x:Name="SelectionHighlight" 
-                                Background="#FF3DFFF8" 
-                                Height="1" 
-                                VerticalAlignment="Bottom" 
-                                Visibility="Collapsed"/>
+                        <!-- 选中状态底部高亮条的外发光层 -->
+                        <Border x:Name="SelectionHighlightGlow"
+                                Height="6"
+                                VerticalAlignment="Bottom"
+                                HorizontalAlignment="Stretch"
+                                Visibility="Collapsed"
+                                Opacity="0"
+                                Margin="12,0,12,-2"
+                                IsHitTestVisible="False">
+                            <Border.Background>
+                                <RadialGradientBrush RadiusX="0.5" RadiusY="1.0" Center="0.5,0" GradientOrigin="0.5,0">
+                                    <GradientStop Color="#8061D1F0" Offset="0"/>
+                                    <GradientStop Color="#0061D1F0" Offset="1"/>
+                                </RadialGradientBrush>
+                            </Border.Background>
+                        </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="SelectionGlow" Property="Opacity" Value="1"/>
-                            <Setter TargetName="SelectionHighlight" Property="Visibility" Value="Visible"/>
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="SelectionGlow" Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.15" />
+                                        <DoubleAnimation Storyboard.TargetName="SelectionOverlay" Storyboard.TargetProperty="Opacity" To="0.8" Duration="0:0:0.15" />
+                                        
+                                        <!-- 独立高光层动画：变高（向下延伸更多） -->
+                                        <ThicknessAnimation Storyboard.TargetName="IndependentHighlight" Storyboard.TargetProperty="Margin" To="0,0,0,-10" Duration="0:0:0.15" DecelerationRatio="0.5" />
+                                        
+                                        <!-- 额外高光层动画：显现并同步延伸 -->
+                                        <DoubleAnimation Storyboard.TargetName="IndependentHighlightGlow" Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.15" />
+                                        <ThicknessAnimation Storyboard.TargetName="IndependentHighlightGlow" Storyboard.TargetProperty="Margin" To="0,0,0,-10" Duration="0:0:0.15" DecelerationRatio="0.5" />
+
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SelectionHighlightGlow" Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <DoubleAnimation Storyboard.TargetName="SelectionHighlightGlow" Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.15" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="SelectionGlow" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.15" />
+                                        <DoubleAnimation Storyboard.TargetName="SelectionOverlay" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.15" />
+                                        
+                                        <!-- 独立高光层动画：恢复原状 -->
+                                        <ThicknessAnimation Storyboard.TargetName="IndependentHighlight" Storyboard.TargetProperty="Margin" To="0,0,0,0" Duration="0:0:0.15" AccelerationRatio="0.5" />
+                                        
+                                        <!-- 额外高光层动画：消失并恢复原状 -->
+                                        <DoubleAnimation Storyboard.TargetName="IndependentHighlightGlow" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.15" />
+                                        <ThicknessAnimation Storyboard.TargetName="IndependentHighlightGlow" Storyboard.TargetProperty="Margin" To="0,0,0,0" Duration="0:0:0.15" AccelerationRatio="0.5" />
+
+                                        <DoubleAnimation Storyboard.TargetName="SelectionHighlightGlow" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.15" />
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SelectionHighlightGlow" Storyboard.TargetProperty="Visibility" BeginTime="0:0:0.15">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Collapsed}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
                             <Setter TargetName="Border" Property="Background" Value="Transparent"/>
                             <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="#FFFFFFFF"/>
                             <Setter TargetName="ContentSite" Property="TextElement.FontWeight" Value="Bold"/>
                         </Trigger>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Border" Property="Background" Value="#1AFFFFFF"/>
-                            <Setter TargetName="ContentSite" Property="TextElement.Foreground" Value="#FFFFFFFF"/>
-                        </Trigger>
+                        
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True"/>
                                 <Condition Property="IsSelected" Value="False"/>
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="Border" Property="Background" Value="#1AFFFFFF"/>
+                            <MultiTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="Border" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="#1AFFFFFF" Duration="0:0:0.1" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.EnterActions>
+                            <MultiTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="Border" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="Transparent" Duration="0:0:0.1" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.ExitActions>
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -61,36 +162,48 @@
         </Setter>
     </Style>
 
+    <!-- AeroTabControlStyle: 顶部标签页控件样式 -->
     <Style x:Key="AeroTabControlStyle" TargetType="{x:Type TabControl}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabControl}">
                     <Grid>
                         <Grid.RowDefinitions>
+                            <!-- 标签头部行 -->
                             <RowDefinition Height="Auto"/>
+                            <!-- 内容区域行 -->
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         
-                        <!-- Tab Header Background (Glass Bar) -->
-                        <Border Grid.Row="0" 
+                        <!-- 标签头部背景（玻璃条） -->
+                        <Border Grid.Row="0"
                                 Background="Transparent"
-                                BorderBrush="{StaticResource AeroBorderBrush}" 
+                                BorderBrush="{StaticResource AeroBorderBrush}"
                                 BorderThickness="0,0,0,1"
                                 Padding="0,0,0,0">
                             <Grid>
-                                <!-- Left separator so the first tab isn't floating -->
+                                <!-- 背景高光层，填补 TabItem 之外的区域 -->
+                                <Border Background="{StaticResource AeroHeaderOverlayBrush}" IsHitTestVisible="False" />
+                                
+                                <!-- 左侧分隔线，使第一个标签不会悬浮 -->
                                 <Border Width="1"
                                         HorizontalAlignment="Left"
                                         Background="{StaticResource AeroSeparatorBrush}"
                                         Opacity="0.9"
                                         IsHitTestVisible="False"/>
+                                <!-- 标签页面板 -->
                                 <TabPanel IsItemsHost="True" HorizontalAlignment="Center" Background="Transparent"/>
                             </Grid>
                         </Border>
                         
-                        <!-- Content Area -->
-                        <Border Grid.Row="1" Background="{StaticResource AeroContentBackgroundBrush}">
-                            <ContentPresenter ContentSource="SelectedContent"/>
+                        <!-- 内容区域 -->
+                        <Border Grid.Row="1"
+                                Background="Transparent"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter x:Name="PART_SelectedContentHost"
+                                              ContentSource="SelectedContent"
+                                              Margin="{TemplateBinding Padding}"/>
                         </Border>
                     </Grid>
                 </ControlTemplate>

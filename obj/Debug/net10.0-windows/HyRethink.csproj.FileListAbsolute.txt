@@ -23,3 +23,13 @@ C:\Users\25465\source\repos\HyRethink\HyRethink\obj\Debug\net10.0-windows\refint
 C:\Users\25465\source\repos\HyRethink\HyRethink\obj\Debug\net10.0-windows\HyRethink.pdb
 C:\Users\25465\source\repos\HyRethink\HyRethink\obj\Debug\net10.0-windows\HyRethink.genruntimeconfig.cache
 C:\Users\25465\source\repos\HyRethink\HyRethink\obj\Debug\net10.0-windows\ref\HyRethink.dll
+C:\Users\25465\source\repos\HyRethink\HyRethink\obj\Debug\net10.0-windows\Views\MediaPage.g.cs
+C:\Users\25465\source\repos\HyRethink\HyRethink\obj\Debug\net10.0-windows\Views\OperationsPage.g.cs
+C:\Users\25465\source\repos\HyRethink\HyRethink\obj\Debug\net10.0-windows\Views\QueuePage.g.cs
+C:\Users\25465\source\repos\HyRethink\HyRethink\obj\Debug\net10.0-windows\Views\TasksPage.g.cs
+C:\Users\25465\source\repos\HyRethink\HyRethink\obj\Debug\net10.0-windows\Views\WelcomePage.g.cs
+C:\Users\25465\source\repos\HyRethink\HyRethink\obj\Debug\net10.0-windows\Views\MediaPage.baml
+C:\Users\25465\source\repos\HyRethink\HyRethink\obj\Debug\net10.0-windows\Views\OperationsPage.baml
+C:\Users\25465\source\repos\HyRethink\HyRethink\obj\Debug\net10.0-windows\Views\QueuePage.baml
+C:\Users\25465\source\repos\HyRethink\HyRethink\obj\Debug\net10.0-windows\Views\TasksPage.baml
+C:\Users\25465\source\repos\HyRethink\HyRethink\obj\Debug\net10.0-windows\Views\WelcomePage.baml
