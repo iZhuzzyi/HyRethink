@@ -90,19 +90,20 @@
                         Style="{StaticResource AeroTabControlStyle}"
                         Background="Transparent"
                         BorderThickness="0"
-                        Margin="200,-1,0,0"
+                        Margin="0,-1,0,0"
+                        Padding="200,0,0,0"
                         SelectedIndex="{Binding SelectedTabIndex}">
                 <TabItem Header="媒体" Style="{StaticResource AeroTabItemStyle}" FontFamily="Segoe UI" FontSize="24">
-                    <views:MediaPage DataContext="{Binding MediaVM}" Margin="-202,0,0,0"/>
+                    <views:MediaPage DataContext="{Binding MediaVM}"/>
                 </TabItem>
                 <TabItem Header="操作" Style="{StaticResource AeroTabItemStyle}" FontFamily="Segoe UI" FontSize="24">
-                    <views:OperationsPage DataContext="{Binding OperationsVM}" Margin="-202,0,0,0"/>
+                    <views:OperationsPage DataContext="{Binding OperationsVM}"/>
                 </TabItem>
                 <TabItem Header="任务" Style="{StaticResource AeroTabItemStyle}" FontFamily="Segoe UI" FontSize="24">
-                    <views:TasksPage DataContext="{Binding TasksVM}" Margin="-202,0,0,0"/>
+                    <views:TasksPage DataContext="{Binding TasksVM}"/>
                 </TabItem>
                 <TabItem Header="队列" Style="{StaticResource AeroTabItemStyle}" FontFamily="Segoe UI" FontSize="24">
-                    <views:QueuePage DataContext="{Binding QueueVM}" Margin="-202,0,0,0"/>
+                    <views:QueuePage DataContext="{Binding QueueVM}"/>
                 </TabItem>
             </TabControl>
         </Grid>
