@@ -44,9 +44,9 @@
             <Border Grid.Row="0" Background="{StaticResource AeroHeaderBrush}" BorderBrush="{StaticResource AeroBorderBrush}" BorderThickness="0,0,0,1">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="183"/>
                         <!-- Logo区域宽度 -->
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition/>
                         <ColumnDefinition Width="Auto"/>
                         <!-- 窗口控制按钮占位 -->
                     </Grid.ColumnDefinitions>
@@ -59,7 +59,7 @@
                                 Orientation="Horizontal"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Left"
-                                Margin="17,0,0,0">
+                                Margin="17,0,0,0" Height="49" Width="134">
                         <Image
                                Height="49"
                                Width="56"
